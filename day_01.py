@@ -5,7 +5,7 @@ pattern = re.compile(r"(\d+)\s+(\d+)")
 first_set = []
 second_set = []
 
-with open("input/01/test_input", "r") as file:
+with open("input/01/real_input", "r") as file:
     for line in file:
         match = pattern.search(line.strip())
         if match:
@@ -35,4 +35,4 @@ for number in first_set:
         total_similarity_score += similarity_score
         print(f"Found {number} in second set, score of {similarity_score}")
 
-print(f"Total similarity score: {total_similarity_score}")
+print(f"Total similarity score: {total_similarity_score} ✅")
