@@ -9,15 +9,30 @@ def is_gradually_changing(levels):
     return True
 
 
-with open("input/02/real_input", "r") as file:
+with open("input/02/test_input", "r") as file:
     safe_count = 0
     for line in file:
+        print()
         levels_as_strings = line.split()
         levels = list(map(int, levels_as_strings))
-        sorted_levels = sorted(levels)
-        reverse_sorted_levels = sorted(levels, reverse=True)
-        if levels == sorted_levels or levels == reverse_sorted_levels:
-            if is_gradually_changing(levels):
-                safe_count += 1
 
-print(f"Safe count: {safe_count} ✅")
+        possible_dampened_levels = []
+        for i in range(0, len(levels)):
+            possible_dampened_levels.append(levels[:i] + levels[i + 1 :])
+
+        print(f"Levels: {levels}")
+        for dampened_levels in possible_dampened_levels:
+            print(f"Dampened levels: {dampened_levels}")
+            sorted_levels = sorted(dampened_levels)
+            reverse_sorted_levels = sorted(dampened_levels, reverse=True)
+            if (
+                dampened_levels == sorted_levels
+                or dampened_levels == reverse_sorted_levels
+            ):
+                if is_gradually_changing(dampened_levels):
+                    safe_count += 1
+                    print(f"{dampened_levels} is safe")
+                    break
+
+
+print(f"Safe count: {safe_count}")
