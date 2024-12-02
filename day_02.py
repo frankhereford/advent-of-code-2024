@@ -35,4 +35,4 @@ with open("input/02/test_input", "r") as file:
                     break
 
 
-print(f"Safe count: {safe_count}")
+print(f"Safe count: {safe_count} ✅")
