@@ -9,14 +9,15 @@ def is_gradually_changing(levels):
     return True
 
 
-with open("input/02/test_input", "r") as file:
+with open("input/02/real_input", "r") as file:
     safe_count = 0
     for line in file:
-        levels = line.split()
+        levels_as_strings = line.split()
+        levels = list(map(int, levels_as_strings))
         sorted_levels = sorted(levels)
         reverse_sorted_levels = sorted(levels, reverse=True)
         if levels == sorted_levels or levels == reverse_sorted_levels:
             if is_gradually_changing(levels):
                 safe_count += 1
 
-print(f"Safe count: {safe_count}")
+print(f"Safe count: {safe_count} ✅")
