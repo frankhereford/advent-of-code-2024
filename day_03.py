@@ -14,4 +14,4 @@ with open("input/03/real_input", "r") as file:
             # print(match)
             sum_of_products += int(match.group(1)) * int(match.group(2))
 
-print(f"Sum of products: {sum_of_products}")
+print(f"Sum of products: {sum_of_products} ✅")
