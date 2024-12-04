@@ -3,8 +3,8 @@
 import pprint
 
 matrix = []
-with open("input/04/test_input_part_1", "r") as file:
-    # with open("input/04/real_input", "r") as file:
+# with open("input/04/test_input_part_1", "r") as file:
+with open("input/04/real_input", "r") as file:
     for line in file:
         matrix.append(list(line.strip()))
 
