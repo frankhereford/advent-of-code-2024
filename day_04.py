@@ -157,11 +157,11 @@ print("\n\n\n\n")
 found_count = 0
 for i in range(1, len(matrix) - 1):
     for j in range(1, len(matrix[i]) - 1):
-        print(f"Checking {i}, {j}")
+        # print(f"\nChecking {i}, {j}")
 
         # gotta have an A at the center of the X
         if not matrix[i][j] == "A":
-            print("No A")
+            print(f"{i}, {j}: No A")
             continue
 
         # gotta have the right set of letters around the A
@@ -171,15 +171,18 @@ for i in range(1, len(matrix) - 1):
             matrix[i + 1][j - 1],
             matrix[i + 1][j + 1],
         } == set(["M", "M", "S", "S"]):
-            print("Wrong letters")
+            print(f"{i}, {j}: Wrong letters")
             continue
 
         # make sure we have MAS's, not MAM's or SAS's
-        if matrix[i - 1][j - 1] == matrix[i + 1][j + 1]:
-            print("MAM and SAS")
+        if (
+            matrix[i - 1][j - 1] == matrix[i + 1][j + 1]
+            or matrix[i + 1][j - 1] == matrix[i - 1][j + 1]
+        ):
+            print(f"{i}, {j}: MAM and/or SAS")
             continue
 
-        print("bingo!")
+        print(f"bingo!, A at {i}, {j}")
         found_count += 1
 
 print(f"Found {found_count} XMASs ✅")
