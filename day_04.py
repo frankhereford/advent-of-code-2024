@@ -3,8 +3,8 @@
 import pprint
 
 matrix = []
-# with open("input/04/test_input_part_1", "r") as file:
-with open("input/04/real_input", "r") as file:
+with open("input/04/test_input_part_1", "r") as file:
+    # with open("input/04/real_input", "r") as file:
     for line in file:
         matrix.append(list(line.strip()))
 
@@ -149,3 +149,37 @@ for i in range(0, len(matrix)):
             find_count += 1
 
 print(f"Found {find_count} XMASs ✅")
+
+
+print("\n\n\n\n")
+
+
+found_count = 0
+for i in range(1, len(matrix) - 1):
+    for j in range(1, len(matrix[i]) - 1):
+        print(f"Checking {i}, {j}")
+
+        # gotta have an A at the center of the X
+        if not matrix[i][j] == "A":
+            print("No A")
+            continue
+
+        # gotta have the right set of letters around the A
+        if not {
+            matrix[i - 1][j - 1],
+            matrix[i - 1][j + 1],
+            matrix[i + 1][j - 1],
+            matrix[i + 1][j + 1],
+        } == set(["M", "M", "S", "S"]):
+            print("Wrong letters")
+            continue
+
+        # make sure we have MAS's, not MAM's or SAS's
+        if matrix[i - 1][j - 1] == matrix[i + 1][j + 1]:
+            print("MAM and SAS")
+            continue
+
+        print("bingo!")
+        found_count += 1
+
+print(f"Found {found_count} XMASs ✅")
