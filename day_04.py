@@ -3,7 +3,8 @@
 import pprint
 
 matrix = []
-with open("input/04/test_input_part_1", "r") as file:
+# with open("input/04/test_input_part_1", "r") as file:
+with open("input/04/real_input", "r") as file:
     for line in file:
         matrix.append(list(line.strip()))
 
@@ -147,4 +148,4 @@ for i in range(0, len(matrix)):
             print(f"Found up-right XMAS starting at ({i}, {j})")
             find_count += 1
 
-print(f"Found {find_count} XMASs")
+print(f"Found {find_count} XMASs ✅")
