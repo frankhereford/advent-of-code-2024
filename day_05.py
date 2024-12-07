@@ -21,8 +21,8 @@ def is_compliant(update, rule_pair):
         return True
 
 
-with open("input/05/test_input_1", "r") as file:
-    # with open("input/05/real_input", "r") as file:
+# with open("input/05/test_input_1", "r") as file:
+with open("input/05/real_input", "r") as file:
     input_rules = True
     for line in file:
         if line.strip():
