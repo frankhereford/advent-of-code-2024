@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import re
+import pprint
 
 rule_pattern = re.compile(r"(\d+)\|(\d+)")
 
@@ -41,10 +42,11 @@ with open("input/05/test_input_1", "r") as file:
             input_rules = False
 
 
-print(rule_pairs)
-print(updates)
+pprint.pprint(rule_pairs)
+pprint.pprint(updates)
 
 sum_of_middles = 0
+sum_of_corrected_middles = 0
 for update in updates:
     update_ok = True
     for rule in rule_pairs:
@@ -55,7 +57,34 @@ for update in updates:
     print(f"Update {update} compliance status: {update_ok}")
     if update_ok:
         middle_index = int((len(update) - 1) / 2)
-        print(f"Middle index: {middle_index}")
-        print(f"Middle page: {update[middle_index]}")
+        # print(f"Middle index: {middle_index}")
+        # print(f"Middle page: {update[middle_index]}")
         sum_of_middles += update[middle_index]
-print(f"Sum of middle pages: {sum_of_middles}")
+    else:
+        did_comply = False
+        while not did_comply:
+            did_comply = True
+            for rule in rule_pairs:
+                if rule[0] in update and rule[1] in update:
+                    rule_first_element_index = update.index(rule[0])
+                    rule_second_element_index = update.index(rule[1])
+                    if rule_first_element_index < rule_second_element_index:
+                        print(f"{rule} applies and ✅")
+                    else:
+                        print(f"{rule} applies and ❌")
+                        did_comply = False
+                        print(f"Before: {update}")
+                        previous_value = update[rule_first_element_index]
+                        update[rule_first_element_index] = update[
+                            rule_second_element_index
+                        ]
+                        update[rule_second_element_index] = previous_value
+                        print(f"After: {update}")
+
+        middle_index = int((len(update) - 1) / 2)
+        # print(f"Middle index: {middle_index}")
+        # print(f"Middle page: {update[middle_index]}")
+        sum_of_corrected_middles += update[middle_index]
+print(f"Sum of previously correct middle pages (part 1): {sum_of_middles}")
+
+print(f"Sum of corrected middle pages (part 2): {sum_of_corrected_middles}")
