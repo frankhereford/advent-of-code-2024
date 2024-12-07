@@ -3,8 +3,8 @@
 import pprint
 
 matrix = []
-with open("input/06/test_input", "r") as file:
-    # with open("input/05/real_input", "r") as file:
+# with open("input/06/test_input", "r") as file:
+with open("input/06/real_input", "r") as file:
     for line in file:
         matrix.append(list(line.strip()))
 
@@ -49,4 +49,4 @@ while (
     else:
         guard = next_space
 
-pprint.pprint(f"Visited spaces: {len(visited_spaces)}")
+print(f"Visited spaces: {len(visited_spaces)}")
