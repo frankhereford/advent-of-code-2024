@@ -4,10 +4,19 @@ import pprint
 import itertools
 
 matrix = []
-# with open("input/08/test_input", "r") as file:
-with open("input/08/real_input", "r") as file:
+with open("input/08/test_input", "r") as file:
+    # with open("input/08/real_input", "r") as file:
     for line in file:
         matrix.append(list(line.strip()))
+
+
+def is_point_in_matrix(matrix, point):
+    if (point[0] >= 0 and point[0] < len(matrix)) and (
+        point[1] >= 0 and point[1] < len(matrix[0])
+    ):
+        return True
+    return False
+
 
 frequencies = set()
 for rank in matrix:
@@ -41,16 +50,40 @@ for frequency in frequency_locations:
         delta_x = antenna_pair[0][0] - antenna_pair[1][0]
         delta_y = antenna_pair[0][1] - antenna_pair[1][1]
 
-        antinode_a = (antenna_pair[0][0] + delta_x, antenna_pair[0][1] + delta_y)
-        antinode_b = (antenna_pair[1][0] - delta_x, antenna_pair[1][1] - delta_y)
+        point_in_matrix = True
+        while point_in_matrix:
+            for iteration in range(0, len(matrix)):
+                antinode_a = (
+                    antenna_pair[0][0] + delta_x * iteration,
+                    antenna_pair[0][1] + delta_y * iteration,
+                )
+                if not is_point_in_matrix(matrix, antinode_a):
+                    point_in_matrix = False
+                    break
+                antinodes.add(antinode_a)
+
+        point_in_matrix = True
+        while point_in_matrix:
+            for iteration in range(0, len(matrix[0])):  # rectangular board
+                antinode_b = (
+                    antenna_pair[1][0] - delta_x * iteration,
+                    antenna_pair[1][1] - delta_y * iteration,
+                )
+                if not is_point_in_matrix(matrix, antinode_b):
+                    point_in_matrix = False
+                    break
+                antinodes.add(antinode_b)
+
+        # antinode_a = (antenna_pair[0][0] + delta_x, antenna_pair[0][1] + delta_y)
+        # antinode_b = (antenna_pair[1][0] - delta_x, antenna_pair[1][1] - delta_y)
 
         print("antenna_pair: ", antenna_pair)
 
-        print(f"antinode_a: {antinode_a}")
-        print(f"antinode_b: {antinode_b}")
+        # print(f"antinode_a: {antinode_a}")
+        # print(f"antinode_b: {antinode_b}")
 
-        antinodes.add(antinode_a)
-        antinodes.add(antinode_b)
+        # antinodes.add(antinode_a)
+        # antinodes.add(antinode_b)
 
 antinode_locations = 0
 for antinode in antinodes:
