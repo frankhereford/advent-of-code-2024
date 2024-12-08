@@ -51,6 +51,7 @@ def draw_board(matrix, space, guard, heading):
 
 loop_found = 0
 for space in open_spaces:
+    print(f"Trying {space}.")
     # reset the board
     guard = initial_guard_location
     heading = 0
@@ -63,9 +64,9 @@ for space in open_spaces:
         and guard[1] >= 0
         and guard[1] < len(matrix[0])
     ):  # is still on the board?
-        print(f"Guard at {guard} for iteration {iterations}.")
+        # print(f"Guard at {guard} for iteration {iterations}.")
         iterations += 1
-        if iterations > 1000:
+        if iterations > 10000:
             loop_found += 1
             break
 
@@ -86,9 +87,11 @@ for space in open_spaces:
             heading = (heading + 90) % 360
         else:
             guard = next_space
-        draw_board(matrix, space, guard, heading)
-        time.sleep(0.01)
+        # draw_board(matrix, space, guard, heading)
+        # time.sleep(0.2)
         # input()
+
+    print(f"Visited {len(visited_spaces)} spaces in {iterations} iterations.")
 
 print(
     f"Visited spaces: {len(visited_spaces)} in {iterations} iterations with {loop_found} loop spots."
