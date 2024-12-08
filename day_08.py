@@ -4,8 +4,8 @@ import pprint
 import itertools
 
 matrix = []
-with open("input/08/test_input", "r") as file:
-    # with open("input/08/real_input", "r") as file:
+# with open("input/08/test_input", "r") as file:
+with open("input/08/real_input", "r") as file:
     for line in file:
         matrix.append(list(line.strip()))
 
