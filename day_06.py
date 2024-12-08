@@ -4,8 +4,8 @@ import pprint
 import time
 
 matrix = []
-with open("input/06/test_input", "r") as file:
-    # with open("input/06/real_input", "r") as file:
+# with open("input/06/test_input", "r") as file:
+with open("input/06/real_input", "r") as file:
     for line in file:
         matrix.append(list(line.strip()))
 
